@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Resilience Capital Lab | NCDP</title>
+<meta name="description" content="The Resilience Capital Lab builds the evidence, metrics, and market infrastructure to make climate adaptation and resilience investable. Based at the National Center for Disaster Preparedness, Columbia Climate School.">
+<meta name="author" content="National Center for Disaster Preparedness, Columbia Climate School">
+<meta name="theme-color" content="#001B52">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Resilience Capital Lab">
+<meta property="og:title" content="The Resilience Capital Lab">
+<meta property="og:description" content="Building the evidence, metrics, and market infrastructure to make adaptation and resilience investable.">
+<meta name="twitter:card" content="summary">
+<!-- Once the domain is live, uncomment and set these two: -->
+<!-- <link rel="canonical" href="https://YOUR-DOMAIN/"> -->
+<!-- <meta property="og:url" content="https://YOUR-DOMAIN/"> -->
+<!-- To keep the site out of search results while you test, uncomment: -->
+<!-- <meta name="robots" content="noindex,nofollow"> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Serif:opsz,wght@8..144,400;8..144,600;8..144,700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* NCDP tokens, unchanged */
+  --crimson:#CC002B;
+  --slate:#4D4E6A;
+  --colblue:#B4D3E5;
+  --linkblue:#01349A;
+  --navy:#002268;
+  --ink:#2E2E2E;
+  --gray:#585858;
+  --rule:#979797;
+  --cell:#CFCBCB;
+  --headrule:#DBDBDB;
+  --paper:#F8F7F7;
+  --offblack:#30363A;
+  /* Lab-specific derivations from the NCDP navy */
+  --navy-deep:#001B52;
+  --navy-line:rgba(180,211,229,.28);
+  --container:84%;
+  --measure:92ch;      /* prose measure: wide, but not degenerate */
+}
+*{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;font-family:Roboto,sans-serif;color:var(--ink);background:#fff;line-height:1.5}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none;transition:.2s ease-in-out}
+:focus-visible{outline:3px solid var(--linkblue);outline-offset:3px}
+.container{width:var(--container);margin:0 auto;position:relative}
+h1,h2,h3,h4{margin:0}
+p{margin:0 0 1.2em}
+p:last-child{margin-bottom:0}
+
+.eyebrow{font-family:"Roboto Mono",monospace;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+
+/* ---------- header ---------- */
+header{border-top:8px solid var(--headrule);position:relative;z-index:90}
+.parent-bar{border-bottom:1px solid var(--cell);padding:11px 0}
+.parent-bar .container{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.parent-lock{display:block;line-height:0}
+.parent-lock img{height:34px;width:auto;transition:opacity .2s ease-in-out}
+.parent-lock:hover img{opacity:.72}
+.parent-bar .back{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray)}
+.parent-bar .back:hover{color:var(--crimson)}
+.hdr-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding:22px 0 0}
+.wordmark{font-family:"Roboto Serif",Georgia,serif;font-size:26px;font-weight:600;letter-spacing:-.01em;color:var(--navy-deep);line-height:1.1;padding-bottom:14px}
+
+/* ---------- tab bar ---------- */
+.tabs{display:flex;flex-wrap:wrap;gap:0 28px;margin:0;padding:0;list-style:none}
+.tab{
+  appearance:none;background:none;border:0;cursor:pointer;font-family:inherit;
+  font-size:14.5px;font-weight:500;color:var(--ink);padding:0 0 12px;
+  border-bottom:4px solid transparent;transition:.2s ease-in-out
+}
+.tab:hover{color:var(--crimson)}
+.tab[aria-selected="true"]{color:var(--crimson);font-weight:700;border-bottom-color:var(--crimson)}
+.panel[hidden]{display:none}
+
+/* ---------- HERO ---------- */
+.hero{background:var(--navy-deep);border-bottom:4px solid var(--crimson);color:#fff;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:repeating-linear-gradient(to right,var(--navy-line) 0 1px,transparent 1px 12.5%);
+  opacity:.55;pointer-events:none
+}
+.hero-inner{position:relative;z-index:2;padding:5.5em 0 0}
+.hero .eyebrow{color:var(--colblue);margin-bottom:26px;display:block}
+.hero h1{
+  font-family:"Roboto Serif",Georgia,serif;font-weight:600;
+  font-size:clamp(40px,6.2vw,82px);line-height:1.02;letter-spacing:-.015em;margin:0 0 28px;max-width:20ch
+}
+.hero .lede{font-size:clamp(19px,2.1vw,26px);line-height:1.45;max-width:64ch;color:#EAF2F8;margin:0 0 3.2em}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--navy-line)}
+.strip .cell{padding:24px 32px 34px 0;border-right:1px solid var(--navy-line)}
+.strip .cell:last-child{border-right:0;padding-right:0}
+.strip .n{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--colblue);display:block;margin-bottom:10px}
+.strip .t{font-family:"Roboto Serif",Georgia,serif;font-size:21px;font-weight:600;display:block;margin-bottom:6px}
+.strip .d{font-size:14.5px;line-height:1.45;color:#C6D6E4}
+/* compact hero on interior tabs */
+.hero.compact .hero-inner{padding:2.6em 0 2.4em}
+.hero.compact h1{font-size:clamp(32px,4vw,50px);margin-bottom:0}
+.hero.compact .lede,.hero.compact .strip{display:none}
+.hero.compact .eyebrow{margin-bottom:18px}
+
+/* ---------- microsite grid ---------- */
+.microsite{padding:4em 0}
+.ms-grid{display:grid;grid-template-columns:25% 70%;gap:0 5%}
+.factrail{border-top:2px solid var(--rule)}
+.factrail dl{margin:0}
+.factrail dt{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);padding-top:18px}
+.factrail dd{margin:5px 0 0;padding-bottom:18px;border-bottom:1px solid var(--cell);font-size:16px;line-height:1.45;font-weight:500;color:var(--ink)}
+.factrail dd a{color:var(--linkblue);text-decoration:underline}
+.factrail dd a:hover{color:var(--crimson)}
+.ms-content h2:first-of-type{border-top:2px solid var(--crimson);padding-top:24px;margin:0 0 24px;font-size:34px;font-weight:700}
+.ms-content p{font-size:20px;font-weight:500;line-height:1.55}
+
+/* ---------- section scaffolding ---------- */
+.section{padding:4.5em 0}
+.section.paper{background:var(--paper)}
+.section.navy{background:var(--navy);color:#fff}
+.section.slate{background:var(--slate);color:#fff}
+.section.offblack{background:var(--offblack);color:#fff}
+.section-title{font-size:34px;font-weight:700;margin:0 0 14px;padding-top:24px;border-top:2px solid var(--gray)}
+.section.navy .section-title,
+.section.slate .section-title,
+.section.offblack .section-title{border-top-color:#fff}
+.section-note{font-size:17px;max-width:var(--measure);margin:0 0 2.4em;color:var(--gray)}
+.section.navy .section-note,
+.section.slate .section-note,
+.section.offblack .section-note{color:#C6D6E4}
+
+/* ---------- THE LEDGER ---------- */
+.ledger{width:100%;border-collapse:collapse;margin-top:.6em;table-layout:fixed}
+.ledger caption{text-align:left;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--colblue);padding-bottom:18px}
+.ledger th{
+  text-align:left;font-family:"Roboto Mono",monospace;font-size:11.5px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;padding:0 26px 14px 0;
+  border-bottom:1px solid rgba(255,255,255,.35);vertical-align:bottom;width:33.33%
+}
+.ledger th.need{color:var(--colblue)}
+.ledger th.gap{color:#F2A0AF}
+.ledger th.build{color:#fff}
+.ledger td{padding:22px 26px 22px 0;border-bottom:1px solid rgba(255,255,255,.16);font-size:16.5px;line-height:1.5;vertical-align:top;color:#DCE6EF}
+.ledger th:last-child,.ledger td:last-child{padding-right:0}
+.ledger td.build{color:#fff;font-weight:500}
+.ledger tr td:first-child{font-weight:500;color:#fff}
+.ledger .idx{font-family:"Roboto Mono",monospace;font-size:11px;color:var(--colblue);display:block;margin-bottom:8px;letter-spacing:.1em}
+
+/* ---------- workstream cards ---------- */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:3em 3%}
+.card{border-top:5px solid var(--navy);padding-top:1.4em}
+.card h3{font-family:"Roboto Serif",Georgia,serif;font-size:24px;font-weight:600;margin:0 0 6px}
+.card .kicker{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--crimson);display:block;margin-bottom:14px}
+.card p{font-size:16px;line-height:1.55;color:var(--gray)}
+.card ul{margin:14px 0 0;padding-left:1.1em;font-size:15.5px;color:var(--gray);line-height:1.6}
+.card li{margin-bottom:6px}
+
+/* ---------- case study cards ---------- */
+.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6em 4%;margin-top:.6em}
+.cs{border-top:1px solid var(--rule);padding-top:1.4em;display:flex;flex-direction:column}
+.cs .src{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crimson);display:block;margin-bottom:12px}
+.cs h3{font-family:"Roboto Serif",Georgia,serif;font-size:26px;font-weight:600;margin:0 0 12px;line-height:1.2}
+.cs p{font-size:16.5px;line-height:1.55;color:var(--gray);flex:1}
+.cs .status{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--rule);margin-top:18px}
+.cs:hover h3{color:var(--crimson)}
+.cs.plain:hover h3{color:inherit}
+
+/* ---------- convening / event ---------- */
+.event{border-top:1px solid var(--navy-line);padding-top:1.6em;display:grid;grid-template-columns:1.6fr 1fr;gap:0 6%}
+.event + .event{margin-top:3.4em}
+.status-pill{display:inline-block;font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--offblack);background:var(--colblue);padding:5px 11px 4px;margin-bottom:16px}
+.event h3{font-family:"Roboto Serif",Georgia,serif;font-size:clamp(26px,3.2vw,38px);font-weight:600;margin:0 0 18px;line-height:1.15}
+.event p{font-size:17.5px;line-height:1.55;color:#D8E2EA}
+.event dl{margin:0;border-top:1px solid var(--navy-line)}
+.event dt{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--colblue);padding-top:15px}
+.event dd{margin:4px 0 0;padding-bottom:15px;border-bottom:1px solid var(--navy-line);font-size:15.5px;line-height:1.45;color:#fff}
+
+/* ---------- people ---------- */
+.people{display:grid;grid-template-columns:1fr 1fr;gap:3em 4%}
+.person{display:grid;grid-template-columns:150px 1fr;gap:0 26px}
+.portrait{width:150px;height:180px;background:var(--paper);border-top:5px solid var(--crimson);display:flex;align-items:center;justify-content:center;font-family:"Roboto Mono",monospace;font-size:10px;letter-spacing:.14em;color:var(--rule);text-align:center;padding:8px;overflow:hidden}
+.portrait.has-photo{padding:0}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.person .role{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--crimson);display:block;margin-bottom:8px}
+.person h3{font-size:22px;font-weight:700;margin:0 0 2px}
+.person .title{color:var(--navy);font-weight:500;font-size:16px;margin:0 0 12px}
+.person p{font-size:15.5px;line-height:1.55;color:var(--gray)}
+.arrow-link{font-weight:700;text-transform:uppercase;color:var(--linkblue);font-size:14px;letter-spacing:.03em;display:inline-block;margin-top:14px}
+.arrow-link::after{content:" \203A";font-size:19px;line-height:1}
+.arrow-link:hover{color:var(--crimson)}
+
+/* ---------- related NCDP ---------- */
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.6em 3%}
+.rel{border-bottom:5px solid var(--colblue);padding-bottom:1.5em}
+.rel .tag{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:10px}
+.rel h3{font-size:20px;font-weight:700;color:var(--navy);margin:0 0 8px;line-height:1.3;padding-bottom:15px;border-bottom:1px solid var(--rule)}
+.rel p{font-size:15.5px;color:var(--gray);line-height:1.5;margin:12px 0 0}
+.rel:hover h3{color:var(--crimson)}
+
+/* ---------- external ---------- */
+.ext-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 4%}
+.ext{border-top:1px solid rgba(255,255,255,.4);padding:26px 26px 26px 0}
+.ext:last-child{padding-right:0}
+.ext .host{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--colblue);display:block;margin-bottom:10px}
+.ext h3{font-family:"Roboto Serif",Georgia,serif;font-size:25px;font-weight:600;margin:0 0 10px;line-height:1.2}
+.ext p{font-size:16px;line-height:1.5;color:#D3DEE8}
+.ext .out{font-weight:700;text-transform:uppercase;font-size:13.5px;letter-spacing:.04em;color:var(--colblue);display:inline-block;margin-top:14px}
+.ext .out::after{content:" \2197";font-size:15px}
+.ext .out:hover{color:#fff}
+.disclaimer{font-size:13.5px;color:#AFC2D2;margin-top:2.4em;max-width:var(--measure);line-height:1.55}
+
+.credit{font-size:15px;color:var(--gray);max-width:var(--measure)}
+.section.credit-band{padding:2.4em 0 3em}
+
+/* ---------- empty state ---------- */
+.empty{border-top:1px solid var(--cell);padding-top:2em;color:var(--gray);font-size:17px;max-width:var(--measure)}
+
+/* ---------- footer ---------- */
+footer{background:var(--gray);border-top:15px solid var(--crimson);padding:34px 0 18px;color:#fff}
+footer .container{width:92%}
+.f-top{display:grid;grid-template-columns:330px 1fr;gap:0 4%;align-items:start}
+.f-logo img{height:30px;width:auto}
+.f-meta{text-align:right;font-size:16px;line-height:1.5}
+.f-meta a{color:#fff;text-decoration:underline}
+.f-social{margin:14px 0 0;padding:0;list-style:none;display:flex;gap:16px;font-size:14px}
+.f-nav{margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.3);display:flex;flex-wrap:wrap;gap:8px 26px;font-size:14px;font-weight:500}
+
+/* ---------- placeholder chrome ---------- */
+.ph{background:rgba(204,0,43,.09);outline:1px dashed rgba(204,0,43,.5);padding:0 4px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1024px){
+  :root{--container:88%}
+  .ms-grid{grid-template-columns:1fr;gap:2.6em}
+  .cards3,.rel-grid,.ext-grid{grid-template-columns:1fr 1fr}
+  .people{grid-template-columns:1fr}
+  .event{grid-template-columns:1fr;gap:2.4em}
+  .hero h1{font-size:clamp(34px,7vw,58px)}
+}
+@media (max-width:760px){
+  .strip{grid-template-columns:1fr}
+  .strip .cell{border-right:0;border-bottom:1px solid var(--navy-line);padding:20px 0}
+  .strip .cell:last-child{border-bottom:0}
+  .cards3,.rel-grid,.ext-grid,.cs-grid{grid-template-columns:1fr}
+  .ext{padding-right:0}
+  .f-top{grid-template-columns:1fr}
+  .f-meta{text-align:left;margin-top:18px}
+  .person{grid-template-columns:1fr}
+  .portrait{margin-bottom:16px}
+  .ledger,.ledger tbody,.ledger tr,.ledger td{display:block;width:100%}
+  .ledger thead{display:none}
+  .ledger tr{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.25)}
+  .ledger td{border-bottom:0;padding:6px 0}
+  .ledger td::before{content:attr(data-l);display:block;font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--colblue);margin-bottom:4px}
+  .section{padding:3.2em 0}
+  .hero-inner{padding:3.4em 0 0}
+  .tabs{gap:0 20px}
+  .tab{font-size:13.5px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="parent-bar">
+    <div class="container">
+      <a class="parent-lock" href="https://ncdp.columbia.edu"><img src="data:image/png;base64,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" alt="Columbia Climate School, National Center for Disaster Preparedness"></a>
+      <a class="back" href="https://ncdp.columbia.edu">ncdp.columbia.edu &#8599;</a>
+    </div>
+  </div>
+  <div class="container hdr-inner">
+    <a class="wordmark" href="#" data-go="overview">The Resilience Capital Lab</a>
+    <nav aria-label="Lab sections">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="t-overview" aria-controls="p-overview" aria-selected="true">Overview</button>
+        <button class="tab" role="tab" id="t-cases" aria-controls="p-cases" aria-selected="false">Case Studies</button>
+        <button class="tab" role="tab" id="t-events" aria-controls="p-events" aria-selected="false">Events</button>
+        <button class="tab" role="tab" id="t-pubs" aria-controls="p-pubs" aria-selected="false">Publications</button>
+        <button class="tab" role="tab" id="t-team" aria-controls="p-team" aria-selected="false">Team</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO (persistent; compacts on interior tabs) ============ -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <span class="eyebrow">National Center for Disaster Preparedness &middot; Columbia Climate School</span>
+    <h1>The Resilience Capital Lab</h1>
+    <p class="lede">Building the evidence, metrics, and market infrastructure to make adaptation and resilience investable.</p>
+    <div class="strip">
+      <div class="cell">
+        <span class="n">01 / EVIDENCE</span>
+        <span class="t">What reduces loss</span>
+        <span class="d">Benchmarks against what actually happens, adding context to modelling.</span>
+      </div>
+      <div class="cell">
+        <span class="n">02 / METRICS</span>
+        <span class="t">Numbers that hold up</span>
+        <span class="d">Open, documented, and reproducible by others.</span>
+      </div>
+      <div class="cell">
+        <span class="n">03 / MARKET INFRASTRUCTURE</span>
+        <span class="t">Structures that close</span>
+        <span class="d">Standards, reference terms, and the data inputs that a transaction needs.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PANEL: OVERVIEW ==================== -->
+<div class="panel" id="p-overview" role="tabpanel" aria-labelledby="t-overview">
+
+  <section class="microsite">
+    <div class="container ms-grid">
+      <aside class="factrail">
+        <dl>
+          <dt>Focus</dt>
+          <dd>Adaptation and resilience finance</dd>
+          <dt>Based at</dt>
+          <dd>National Center for Disaster Preparedness, Columbia Climate School</dd>
+          <dt>Co-Directors</dt>
+          <dd>Jeff Schlegelmilch<br>Miren Gil-Vernet Pagonabarraga</dd>
+          <dt>Founded</dt>
+          <dd>2026</dd>
+        </dl>
+      </aside>
+      <div class="ms-content">
+        <h2>Overview</h2>
+        <p>Capital is increasingly focused on climate adaptation and risk management, and there is no shortage of communities, utilities, hospitals, and companies that need to harden against climate risk. The money and the need are not finding each other with the urgency that the climate crisis demands.</p>
+        <p>Part of the reason is that resilience is hard to price. A mitigation project produces a loss that never happens, and an avoided loss does not appear on a balance sheet the way a revenue stream does. Underwriters, ratings agencies, and infrastructure investors are left estimating a benefit that no one has agreed how to measure.</p>
+        <p>The Resilience Capital Lab works on that problem. We build the evidence base, the metrics, and the market infrastructure to help the case for climate adaptation and resilience be underwritten, rated, and financed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy">
+    <div class="container">
+      <h2 class="section-title">Where the market breaks down</h2>
+      <p class="section-note">Two problems sit behind most of this. The first is knowing which variables matter. The second, and much harder one, is causal evidence that a given investment produced a given financial outcome. That second problem will not be solved soon with the evidence base we have. But enumerating the variables, and showing how they played out at specific companies, gives analysts enough to build the case internally.</p>
+      <table class="ledger">
+        <caption>Adaptation finance &middot; gap analysis</caption>
+        <thead>
+          <tr>
+            <th class="need" scope="col">What capital needs</th>
+            <th class="gap" scope="col">What exists today</th>
+            <th class="build" scope="col">What the Lab is building</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-l="What capital needs"><span class="idx">01</span>A loss-avoidance number that survives diligence</td>
+            <td data-l="What exists today">Benefit-cost ratios written for federal grant applications, not for underwriting</td>
+            <td class="build" data-l="What the Lab is building">Avoided-loss estimates specified for use in credit, insurance, and capital budgeting decisions</td>
+          </tr>
+          <tr>
+            <td data-l="What capital needs"><span class="idx">02</span>Metrics that are comparable across projects</td>
+            <td data-l="What exists today">Bespoke resilience scores, mostly proprietary and rarely audited</td>
+            <td class="build" data-l="What the Lab is building">Open, documented metrics that a third party can reproduce from published methods</td>
+          </tr>
+          <tr>
+            <td data-l="What capital needs"><span class="idx">03</span>Risk assessment that accounts for adaptation</td>
+            <td data-l="What exists today">Physical risk scores that stop at exposure and seldom credit mitigation already in place</td>
+            <td class="build" data-l="What the Lab is building">Adaptation-adjusted risk assessment, validated against observed outcomes</td>
+          </tr>
+          <tr>
+            <td data-l="What capital needs"><span class="idx">04</span>Deal structures that do not start from zero</td>
+            <td data-l="What exists today">One-off transactions, each negotiated and documented from scratch</td>
+            <td class="build" data-l="What the Lab is building">Reference structures, model terms, and case documentation others can build on</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">What we work on</h2>
+      <p class="section-note">Three workstreams, matched to the three things a market needs before it can function.</p>
+      <div class="cards3">
+        <div class="card">
+          <span class="kicker">Workstream 01</span>
+          <h3>Evidence</h3>
+          <p>What actually reduces loss, by how much, and under what conditions. We work from observed outcomes rather than modeled ones wherever the data allows it.</p>
+          <ul>
+            <li>Financial and policy case studies</li>
+            <li>Performance of mitigation in real events</li>
+            <li>Distributional effects across communities</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="kicker">Workstream 02</span>
+          <h3>Metrics</h3>
+          <p>Measurement that someone outside the room can check. Methods are published, inputs are documented, and results are reproducible.</p>
+          <ul>
+            <li>Avoided-loss specification</li>
+            <li>Adaptation-adjusted risk scoring</li>
+            <li>Disclosure and reporting frameworks</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="kicker">Workstream 03</span>
+          <h3>Market Infrastructure</h3>
+          <p>The standards, reference terms, and convening work that let a transaction close without reinventing itself. Boring, and the reason nothing scales without it.</p>
+          <ul>
+            <li>Reference deal structures</li>
+            <li>Standards and taxonomy engagement</li>
+            <li>Closed-door practitioner convenings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paper">
+    <div class="container">
+      <h2 class="section-title">Connected work at NCDP</h2>
+      <p class="section-note">The Lab builds on projects already running across the Center. These are the closest neighbors.</p>
+      <div class="rel-grid">
+        <a class="rel" href="https://ncdp.columbia.edu/microsite-page/financial-instruments-division/">
+          <span class="tag">Practice + Policy</span>
+          <h3>Financial Instruments (FI) Division</h3>
+          <p>Index insurance and index-based disaster risk management, at scale with smallholder farmers across more than a dozen countries.</p>
+        </a>
+        <a class="rel" href="https://ncdp.columbia.edu/microsite-page/clifvi/">
+          <span class="tag">Research &middot; Tool</span>
+          <h3>Climate Finance Vulnerability Index</h3>
+          <p>A data-informed view of how climate exposure and financial fragility compound at the country level.</p>
+        </a>
+        <a class="rel" href="https://ncdp.columbia.edu/microsite-page/economic-preparedness-for-disasters/">
+          <span class="tag">Practice + Policy</span>
+          <h3>Economic Preparedness for Disasters</h3>
+          <p>How households, businesses, and local economies absorb a shock, and what changes the recovery curve.</p>
+        </a>
+        <a class="rel" href="https://ncdp.columbia.edu/us-natural-hazards-index/">
+          <span class="tag">Preparedness Tools</span>
+          <h3>US Natural Hazards Index</h3>
+          <p>NCDP's hazard exposure index, with climate change projections for wildfire, tornado, sea level rise, and tropical cyclone.</p>
+        </a>
+        <a class="rel" href="https://ncdp.columbia.edu/weather-forecasting-for-early-warning-anticipatory-action/">
+          <span class="tag">Practice + Policy</span>
+          <h3>Weather Forecasting for Early Warning Anticipatory Action</h3>
+          <p>Triggering finance and action ahead of an event rather than after it.</p>
+        </a>
+        <a class="rel" href="https://ncdp.columbia.edu/microsite-page/disaster-genome/case-studies/">
+          <span class="tag">Research &middot; Case studies</span>
+          <h3>Disaster Genome Project</h3>
+          <p>Student-led case studies reconstructing disasters from multiple sources. The policy-side companion to the Lab's financial cases.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section slate">
+    <div class="container">
+      <h2 class="section-title">Following the adaptation economy</h2>
+      <p class="section-note">Three independent efforts we read, contribute to, and take part in. None is a Columbia publication or programme.</p>
+      <div class="ext-grid">
+        <div class="ext">
+          <span class="host">climateproof.news</span>
+          <h3>Climate Proof</h3>
+          <p>Louie Woodall's newsletter and podcast on climate adaptation finance, technology, and policy. The closest thing the adaptation economy has to a trade press, and a useful running record of where deals and standards are actually landing.</p>
+          <a class="out" href="https://urldefense.com/v3/__https://www.climateproof.news/__;!!BDUfV1Et5lrpZQ!SkKfrrxL7kuyNpLaY8ZfpRTETWvZ_2eaAGG9cOBRX0hJVRqCobaf1lxNcH74SAD_GnlC8Y6ur9Kjwg7IFFV-cJ__$">Visit Climate Proof</a>
+        </div>
+        <div class="ext">
+          <span class="host">thedisastercapitalist.com</span>
+          <h3>The Disaster Capitalist</h3>
+          <p>Writing and case studies on the economics of disaster: what prevention is worth, who pays for it, and what the numbers look like afterward. The case study library is a working input to the Lab's evidence base.</p>
+          <a class="out" href="https://urldefense.com/v3/__https://www.thedisastercapitalist.com/__;!!BDUfV1Et5lrpZQ!SkKfrrxL7kuyNpLaY8ZfpRTETWvZ_2eaAGG9cOBRX0hJVRqCobaf1lxNcH74SAD_GnlC8Y6ur9Kjwg7IFPU3TWaL$">Visit The Disaster Capitalist</a>
+        </div>
+        <div class="ext">
+          <span class="host">adaptation-exchange.org</span>
+          <h3>Adaptation Exchange</h3>
+          <p>A cross-industry working group building shared tooling for the corporate adaptation case, including a value-lever model for the financial benefit of adaptation. NCDP takes part in the working groups and contributes case-study methodology.</p>
+          <a class="out" href="https://urldefense.com/v3/__https://www.adaptation-exchange.org/__;!!BDUfV1Et5lrpZQ!SkKfrrxL7kuyNpLaY8ZfpRTETWvZ_2eaAGG9cOBRX0hJVRqCobaf1lxNcH74SAD_GnlC8Y6ur9Kjwg7IFHYVGSc0$">Visit Adaptation Exchange</a>
+        </div>
+      </div>
+      <p class="disclaimer">Links to external sites are provided for reference. Content on those sites reflects the views of their authors and does not represent the views of the National Center for Disaster Preparedness, the Columbia Climate School, or Columbia University.</p>
+    </div>
+  </section>
+
+  <section class="section credit-band">
+    <div class="container">
+      <p class="credit"><span class="ph">[Funder and partner acknowledgment line. Every NCDP project page closes with one.]</span></p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ==================== PANEL: CASE STUDIES ==================== -->
+<div class="panel" id="p-cases" role="tabpanel" aria-labelledby="t-cases" hidden>
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Case studies</h2>
+      <p class="section-note">The Lab's main method for the evidence problem. Rather than modeling an avoided loss in the abstract, each case reconstructs a specific event: what was invested beforehand, what happened, and what it cost or saved on the books afterward. Sources are triangulated so that no single disclosure carries the finding.</p>
+      <div class="cs-grid">
+        <a class="cs" href="https://urldefense.com/v3/__https://www.thedisastercapitalist.com/case-studies__;!!BDUfV1Et5lrpZQ!SkKfrrxL7kuyNpLaY8ZfpRTETWvZ_2eaAGG9cOBRX0hJVRqCobaf1lxNcH74SAD_GnlC8Y6ur9Kjwg7IFOj3Ds2G$">
+          <span class="src">The Disaster Capitalist</span>
+          <h3>Financial case studies</h3>
+          <p>Built from corporate disclosures, company press releases, and ratings agency analysis. Each one puts a number on what mitigation did, or failed to do, to a balance sheet after a real event.</p>
+          <div class="status">Published &middot; ongoing</div>
+        </a>
+        <a class="cs" href="https://ncdp.columbia.edu/microsite-page/disaster-genome/case-studies/">
+          <span class="src">Disaster Genome Project &middot; NCDP</span>
+          <h3>Policy case studies</h3>
+          <p>Student-led, focused on the policy and governance side of the same events. Same triangulation method, different question. The two libraries are designed to be read against each other.</p>
+          <div class="status">Published &middot; ongoing</div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== PANEL: EVENTS ==================== -->
+<div class="panel" id="p-events" role="tabpanel" aria-labelledby="t-events" hidden>
+  <section class="section offblack">
+    <div class="container">
+      <h2 class="section-title">Convened and co-hosted</h2>
+      <p class="section-note">Working sessions the Lab convenes or co-hosts, kept deliberately small so that the people who would have to use a metric get to argue about it before it is finalized. Three are planned for New York Climate Week 2026, listed here in date order.</p>
+      <div class="event">
+        <div>
+          <span class="status-pill">NYC Climate Week 2026 &middot; By invitation</span>
+          <h3>Road to COP17: Finance, Nature and Resilience Breakfast Dialogue</h3>
+          <p><em>Where Capital Meets Ecosystems: Mobilizing Finance for Nature and Resilience</em></p>
+          <p>Convened a month ahead of COP17, the seventeenth Conference of the Parties to the Convention on Biological Diversity, in Yerevan, this dialogue brings governments, financial institutions, private finance actors, and multilateral partners together around two constraints on nature finance: capital that could move at scale is still waiting for the catalytic structures that make nature-based investment bankable, and the project-level data investors need to price risk rarely exists at the point a decision is actually made.</p>
+          <p>A third constraint sits underneath both. Many of the assets in question are ecological assets and resilience infrastructure at once. Each carries two value streams and no accepted way to price either, so it competes for capital on the strength of neither. The Lab moderates the session on tools and solutions for investor decision-making, and closes the dialogue.</p>
+        </div>
+        <dl>
+          <dt>Convened by</dt>
+          <dd>COP17 Presidency, the Convention on Biological Diversity (CBD), the Clinton Global Initiative (CGI), the United Nations Environment Programme Finance Initiative (UNEP FI), the Inter-American Development Bank (IDB) Group, and The Resilience Capital Lab, at the National Center for Disaster Preparedness, Columbia Climate School</dd>
+          <dt>Lab role</dt>
+          <dd>Moderates Session 2, Tools and Solutions for Investor Decision-Making; closing remarks</dd>
+          <dt>Format</dt>
+          <dd>Closed-door breakfast dialogue</dd>
+          <dt>Date</dt>
+          <dd>Wednesday, September 23, 2026, 9:00&ndash;11:00 a.m. ET</dd>
+          <dt>Venue</dt>
+          <dd>135 W. 50th Street, Suite 210, New York</dd>
+        </dl>
+      </div>
+      <div class="event">
+        <div>
+          <span class="status-pill">NYC Climate Week 2026 &middot; By invitation</span>
+          <h3>Closing the Resilience Investment Gap</h3>
+          <p><em>Pricing Resilience Investments: Building the Evidence Base for a Broader Market</em></p>
+          <p>As climate-related risks grow, so does the need to invest in making communities, infrastructure, and economies more resilient. One challenge continues to constrain the market: how investors can more consistently identify, measure, and price the financial value of resilience. The roundtable brings a select group of investors, asset managers, issuers, and experts together around that question.</p>
+          <p>The first resilience-labeled issuances have begun to come to market under emerging resilience taxonomies, and a small number of issuers and asset managers are starting to build resilience into allocation decisions. Volumes remain thin, and the pricing question sits underneath all of it.</p>
+          <p>The discussion explores emerging approaches to assessing resilience-related investments, the evidence needed to support a broader market, and opportunities to advance investment across public and private markets. Participants will also help identify priorities for further research and shape the agenda for a broader resilience and adaptation investment event planned for the first half of 2027.</p>
+        </div>
+        <dl>
+          <dt>Convened by</dt>
+          <dd>The Resilience Capital Lab, at the National Center for Disaster Preparedness, Columbia Climate School, with the Global Adaptation and Resilience Investment Working Group (GARI)</dd>
+          <dt>Co-host</dt>
+          <dd>AllianceBernstein</dd>
+          <dt>Format</dt>
+          <dd>Closed-door roundtable under the Chatham House Rule, by invitation</dd>
+          <dt>Date</dt>
+          <dd>Thursday, September 24, 2026, 8:30&ndash;11:00 a.m. ET</dd>
+          <dt>Venue</dt>
+          <dd>AllianceBernstein, 66 Hudson Boulevard East, New York</dd>
+        </dl>
+      </div>
+      <div class="event">
+        <div>
+          <span class="status-pill">NYC Climate Week 2026 &middot; By invitation</span>
+          <h3>From Response to Readiness: Financing Anticipatory Action for Fiscal Resilience</h3>
+          <p>A breakfast roundtable on a single question: under what conditions does acting ahead of a disaster pay for itself from the perspective of a government budget? It builds on an analysis by academics at the University of Oxford, commissioned by the Inter-American Development Bank and supported by the UN Office for the Coordination of Humanitarian Affairs, drawing on eleven country-hazard frameworks across Latin America and the Caribbean.</p>
+          <p>The study finds the fiscal case is strongest for well-forecast, recurrent hazards. In Honduras, every dollar invested ahead of drought returned $1.69 in avoided fiscal costs, counting both the emergency spending averted and the premium governments paid to finance disasters after the fact. The session asks how development banks can finance anticipatory action without adding to the fiscal burden of the governments that need it.</p>
+        </div>
+        <dl>
+          <dt>Convened by</dt>
+          <dd>Inter-American Development Bank with the UN Office for the Coordination of Humanitarian Affairs</dd>
+          <dt>Format</dt>
+          <dd>Invitation-only breakfast roundtable, two hours</dd>
+          <dt>Date</dt>
+          <dd>Thursday, September 24, 2026, 8:00&ndash;10:00 a.m. ET</dd>
+          <dt>Venue</dt>
+          <dd>UN Secretariat, New York</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paper">
+    <div class="container">
+      <h2 class="section-title">Taking part in</h2>
+      <p class="section-note">Sessions convened by others where the Lab takes part rather than hosts.</p>
+      <div class="cs-grid">
+        <div class="cs plain">
+          <span class="src">New York Climate Week 2026</span>
+          <h3>GARI Working Group Meeting</h3>
+          <p>The Global Adaptation and Resilience Investment Working Group (GARI) convenes a practical discussion on mobilizing private investment for climate adaptation and resilience. Drawing on emerging findings from the Climate Adaptation Innovation and Learning white paper and its investor Community of Practice, the session explores the state of the resilience investment market, lessons from investors already putting capital to work, and the actions needed to move from evidence to allocation.</p>
+          <div class="status">Tuesday, September 22, 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== PANEL: PUBLICATIONS ==================== -->
+<div class="panel" id="p-pubs" role="tabpanel" aria-labelledby="t-pubs" hidden>
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Publications</h2>
+      <p class="section-note">Papers, briefs, and commentary from the Lab.</p>
+      <p class="empty"><span class="ph">[Publication list to come. Suggested pattern, matching the NCDP library: title, authors, outlet, date, and a one-line description, filterable by year and type. Worth deciding early whether Disaster Capitalist pieces are listed here or kept separate.]</span></p>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== PANEL: TEAM ==================== -->
+<div class="panel" id="p-team" role="tabpanel" aria-labelledby="t-team" hidden>
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Team</h2>
+      <p class="section-note">The Lab is co-directed out of the National Center for Disaster Preparedness.</p>
+      <div class="people">
+        <div class="person">
+          <div class="portrait has-photo"><img src="data:image/jpeg;base64,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" alt="Jeff Schlegelmilch"></div>
+          <div>
+            <span class="role">Faculty Director &middot; Co-Director</span>
+            <h3>Jeff Schlegelmilch, MPH, MBA</h3>
+            <p class="title">Director, National Center for Disaster Preparedness; Associate Professor for Professional Practice in Climate, Columbia Climate School</p>
+            <p>Jeff Schlegelmilch directs the National Center for Disaster Preparedness at the Columbia Climate School, where his work spans public health preparedness, community resilience, and the integration of private and public sector capabilities. He is the author of <em>Rethinking Readiness: A Brief Guide to Twenty-First-Century Megadisasters</em> and co-author, with Ellen Carlin, of <em>Catastrophic Incentives: Why Our Approaches to Disasters Keep Falling Short</em>, both from Columbia University Press. He is an opinion contributor with The Hill and has advised private sector organizations on grid resilience planning and governments at every level on preparedness systems and policy.</p>
+            <a class="arrow-link" href="https://people.climate.columbia.edu/users/profile/jeffrey-schlegelmilch">For more information</a>
+          </div>
+        </div>
+        <div class="person">
+          <div class="portrait has-photo"><img src="data:image/jpeg;base64,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" alt="Miren Gil-Vernet Pagonabarraga"></div>
+          <div>
+            <span class="role">Co-Director</span>
+            <h3>Miren Gil-Vernet Pagonabarraga</h3>
+            <p class="title">Staff Associate III, Columbia Climate School; Associate in Climate Change Adaptation</p>
+            <p>Miren Gil-Vernet Pagonabarraga is a researcher at the Columbia Climate School, where her work spans adaptation and resilience finance in emerging markets and community resilience. She manages the Climate Capacity Training Program with UNICEF and teaches and mentors graduate students at the Climate School. She previously worked on climate finance at Capital for Climate, researching nature-based solutions funds across South America and Sub-Saharan Africa, and at Genesis Analytics, developing national climate investment plans, evaluating climate risk insurance and adaptation finance programs for clients including the UN Development Programme, the International Fund for Agricultural Development, and the NDC Partnership.</p>
+            <a class="arrow-link" href="https://urldefense.com/v3/__https://www.linkedin.com/in/miren-gil-vernet-bb9560190/__;!!BDUfV1Et5lrpZQ!SkKfrrxL7kuyNpLaY8ZfpRTETWvZ_2eaAGG9cOBRX0hJVRqCobaf1lxNcH74SAD_GnlC8Y6ur9Kjwg7IFNHUVSoM$">For more information</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="f-top">
+      <div class="f-logo">
+        <img src="data:image/png;base64,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" alt="Columbia Climate School, National Center for Disaster Preparedness">
+        <p style="margin:16px 0 0;font-size:15px;font-weight:500">The Resilience Capital Lab</p>
+        <ul class="f-social">
+          <li><a href="#">X</a></li><li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Facebook</a></li><li><a href="#">Bluesky</a></li>
+        </ul>
+      </div>
+      <div class="f-meta">
+        475 Riverside Drive<br>Suite 820<br>New York, NY 10115-0095<br><br>
+        212.853.NCDP (6237)<br><a href="mailto:ncdp@columbia.edu">ncdp@columbia.edu</a>
+      </div>
+    </div>
+    <div class="f-nav">
+      <a href="#" data-go="overview">Overview</a><a href="#" data-go="cases">Case Studies</a>
+      <a href="#" data-go="events">Events</a><a href="#" data-go="pubs">Publications</a>
+      <a href="#" data-go="team">Team</a>
+      <a href="https://ncdp.columbia.edu">NCDP</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var tabs   = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var hero   = document.getElementById('hero');
+
+  function show(key){
+    var tabId = 't-' + key;
+    tabs.forEach(function(t){
+      var on = (t.id === tabId);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    hero.classList.toggle('compact', key !== 'overview');
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ show(t.id.slice(2)); });
+    t.addEventListener('keydown', function(e){
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if(!d) return;
+      e.preventDefault();
+      var next = tabs[(i + d + tabs.length) % tabs.length];
+      next.focus(); show(next.id.slice(2));
+    });
+  });
+
+  document.querySelectorAll('[data-go]').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); show(el.getAttribute('data-go')); });
+  });
+})();
+</script>
+
+</body>
+</html>
