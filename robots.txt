@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Once the domain is live, add:
-# Sitemap: https://YOUR-DOMAIN/sitemap.xml
+Sitemap: https://resiliencecapitallab.org/sitemap.xml
