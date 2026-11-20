@@ -6,25 +6,32 @@ Preparedness, Columbia Climate School.
 ## What's here
 
 ```
-index.html    the entire site — HTML, CSS, JS, and logo assets in one file
-404.html      branded not-found page
-.nojekyll     tells GitHub Pages to serve files as-is
-robots.txt    allows indexing; edit the Sitemap line once the domain is set
-README.md     this file
+_layouts/default.html    shared shell: <head>, CSS, header and tab bar, hero, footer
+index.html               Overview  -> resiliencecapitallab.org/
+case-studies/index.html  Case Studies -> /case-studies/
+events/index.html        Events -> /events/
+publications/index.html  Publications -> /publications/
+team/index.html          Team -> /team/
+_config.yml              Jekyll settings
+404.html                 branded not-found page (standalone)
+sitemap.xml, robots.txt  search-engine files
+README.md                this file (not published)
 ```
 
-There is no build step, no dependencies, and no server-side code. The two NCDP
-logos are base64-embedded, so the page renders correctly even when opened from
-a local file. The only external request is to Google Fonts for Roboto, Roboto
-Serif, and Roboto Mono.
+Each section has its own folder and URL, so any section can be linked to
+directly. GitHub Pages builds the site with Jekyll automatically on every
+commit: each section page starts with a short front-matter block (`layout`,
+`section`, `title`, `description`) and holds only that section's content; the
+header, hero and footer come from `_layouts/default.html`. Do not add a
+`.nojekyll` file, or the layout will stop being applied. The two NCDP logos are
+base64-embedded in the layout. The only external request is to Google Fonts.
 
 ## Publishing to GitHub Pages
 
 1. Create a repository (public is required for Pages on a free account —
    a suggested name is `resilience-capital-lab`).
-2. Upload the contents of this folder to the repository root. Include the
-   dotfile `.nojekyll`; if you use drag-and-drop in the browser, confirm it
-   made it, since some file pickers hide dotfiles.
+2. Upload the contents of this folder to the repository root, including the
+   `_layouts` folder and `_config.yml`. Do not add a `.nojekyll` file.
 3. Repository **Settings → Pages**. Under *Build and deployment*, set Source to
    **Deploy from a branch**, branch `main`, folder `/ (root)`. Save.
 4. Wait a minute or two, then check `https://<account>.github.io/<repo>/`.
@@ -64,7 +71,11 @@ the proxy on if you want it. If you do proxy, set SSL/TLS mode to **Full
 
 ## Editing later
 
-Everything is in `index.html`. The tab behavior is the short script at the
-bottom of the file. NCDP design tokens are the CSS custom properties at the top
+To change a section, edit its `index.html` in that section's folder. To change
+the header, tab bar, hero or footer on every page, edit `_layouts/default.html`.
+To add a section, create `new-section/index.html` with the same front matter,
+then add a tab link in the layout's `<nav>` and footer, and a `<url>` entry in
+`sitemap.xml`. The hero is full height on the Overview and compact on every
+other page. NCDP design tokens are the CSS custom properties at the top
 (`--crimson`, `--slate`, `--colblue`, `--navy`); changing a color there changes
 it everywhere it's used.
