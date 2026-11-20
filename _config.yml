@@ -1,0 +1,7 @@
+# Jekyll settings for GitHub Pages. Each section lives in its own folder
+# (publications/, events/, ...) and shares the header, hero and footer in
+# _layouts/default.html.
+title: The Resilience Capital Lab
+url: https://resiliencecapitallab.org
+exclude:
+  - README.md
